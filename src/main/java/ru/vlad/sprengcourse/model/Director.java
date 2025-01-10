@@ -4,36 +4,28 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Person")
-public class Person {
+@Table(name = "director")
+public class Director {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "director_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "owner")
-    private List<Item> items;
+    @OneToMany(mappedBy = "director")
+    private List<Movie> movies;
 
     @Column(name = "age")
     private int age;
 
-    public Person(){}
+    public Director() {}
 
-    public Person(String name, int age) {
+    public Director(String name, int age) {
         this.name = name;
         this.age = age;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
     }
 
     public int getId() {
@@ -52,6 +44,14 @@ public class Person {
         this.name = name;
     }
 
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
     public int getAge() {
         return age;
     }
@@ -62,7 +62,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "Director{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +

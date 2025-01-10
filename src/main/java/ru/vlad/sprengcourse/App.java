@@ -4,31 +4,32 @@ package ru.vlad.sprengcourse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.vlad.sprengcourse.model.Item;
-import ru.vlad.sprengcourse.model.Person;
+import ru.vlad.sprengcourse.model.Director;
+import ru.vlad.sprengcourse.model.Movie;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class App {
-    public static void main(String[] args) {
-        Configuration configuration = new Configuration().addAnnotatedClass(Person.class)
-                .addAnnotatedClass(Item.class);
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
+    private static Configuration configuration = new Configuration().addAnnotatedClass(Director.class)
+            .addAnnotatedClass(Movie.class);
+    private static SessionFactory sessionFactory = configuration.buildSessionFactory();
+    private static Session session = sessionFactory.getCurrentSession();
 
+    public static void main(String[] args) {
+        getDirectorAndGetHisMovies();
+    }
+
+    public static void getDirectorAndGetHisMovies() {
         try {
             session.beginTransaction();
 
-            Person person = session.get(Person.class, 3);
+            Director director = session.get(Director.class, 1);
 
-            Item item = session.get(Item.class, 2);
-            item.getOwner().getItems().remove(item);
+            System.out.println(director);
 
-            item.setOwner(person);
-            person.getItems().add(item);
+            List<Movie> movies = director.getMovies();
+
+            System.out.println(movies);
 
             session.getTransaction().commit();
         } finally {
