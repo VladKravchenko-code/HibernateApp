@@ -1,7 +1,14 @@
 package ru.vlad.sprengcourse.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "movie")
 public class Movie {
@@ -21,42 +28,8 @@ public class Movie {
     @Column(name = "year_of_production")
     private int yearOfProduction;
 
-    public Movie() {}
-
     public Movie(String name, int yearOfProduction) {
         this.name = name;
-        this.yearOfProduction = yearOfProduction;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Director getDirector() {
-        return director;
-    }
-
-    public void setDirector(Director director) {
-        this.director = director;
-    }
-
-    public int getYearOfProduction() {
-        return yearOfProduction;
-    }
-
-    public void setYearOfProduction(int yearOfProduction) {
         this.yearOfProduction = yearOfProduction;
     }
 
